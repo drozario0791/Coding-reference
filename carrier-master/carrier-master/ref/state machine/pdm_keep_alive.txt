@@ -1,0 +1,35 @@
+
+Hello Support,
+
+The reference manual states:
+
+The PDM expects to receive commands from a controlling device every
+second. If a CAN command message is not received, the PDM assumes that
+the CAN bus is faulted and goes into a Loss of Communication mode.
+
+Which CAN messages are valid to send to keep the PDM from entering
+into Loss of Communication mode? Does the message have to be a Command
+Output Channel command or will the sending of some other message
+prevent entering into a Loss of Communication mode? Is it possible to
+temporally disable the Loss of Communication mode feature?
+
+I ask because there are times when we will need to debug our system
+controller, which is sending the CAN messages, by using a JTAG
+debugger to single-step through source code. During single-step
+debugging with the JTAG, CAN messages are not being sent every second.
+
+Regards,
+Tom Wilson
+
+------------------------------------------------------------------------------
+
+Hello,
+
+Any CAN traffic will be enough to keep the PDM from entering loss of
+communication mode, you could simply create a 'junk' message with no
+value and send to maintain the connection.  unfortunately it is not
+possible to disable the loss of communication mode, as this safeguard
+is currently the only one present against loss of CAN data.
+
+Regards,
+Isaiah Wallace
